@@ -1,23 +1,23 @@
 # My Personal Portfolio Website
 
-Welcome to my personal portfolio repository! This website showcases my projects, skills, and background as an Electrical and Electronics Engineering student.
+Welcome to my personal portfolio repository! This website showcases my projects, skills, and background as a Computer Science student.
 
-## 🔗 Live Demo
-**Click here to view the website:** [https://your-site-name.netlify.app](https://your-site-name.netlify.app)
-*(Note: Replace the link above with your actual Netlify link once the site is live!)*
+##  Live Demo
+**Click here to view the website:** [https://vyntax960.netlify.app/](https://vyntax960.netlify.app/)
 
-## 🛠️ Built With
+##  Built With
 * **HTML5** - For structure
 * **CSS3** - For styling and responsive design
 * **JavaScript** - For interactivity
 * **Netlify** - For hosting
 
-## 📂 Features
+##  Features
 * **About Me Section:** A brief introduction to my background.
 * **Contact Form:** A working form to get in touch.
 * **Responsive Design:** Works on mobile and desktop.
 
-## 👤 Author
+##  Author
 **Aviral Sahu**
 * GitHub: [@Aviralsahu960](https://github.com/Aviralsahu960)
 * LinkedIn: [Aviral Sahu](https://www.linkedin.com/in/aviral-sahu-7b2aab371/)
+  
