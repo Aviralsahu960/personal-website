@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering CSS Layouts | Aviral's Blog</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><img src="vyntax logo.png" alt="Logo" class="logo-img"></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Back to Blog</a></li>
+        </ul>
+    </nav>
+    <header class="blog-hero" style="padding: 6rem 10% 2rem;">
+        <div class="blog-hero-content">
+            <span class="category">Technical Guide</span>
+            <h1>Mastering CSS Grid & Flexbox</h1>
+            <p style="color: #94a3b8;">By Aviral | Dec 10, 2025</p>
+        </div>
+    </header>
+    <section class="blog-container" style="max-width: 800px; margin: 0 auto;">
+        <div class="blog-card" style="padding: 3rem; text-align: left; background: rgba(15, 23, 42, 0.9);">
+            <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?q=80&w=1000" style="width: 100%; border-radius: 12px; margin-bottom: 2rem;">
+            <div style="font-size: 1.1rem; line-height: 1.8; color: #e2e8f0;">
+                <p>The hardest part of web development isn't the logic; it's centering a `div`. Just kidding... sort of. While building Vyntax, I relied heavily on two CSS superpowers: <strong>Grid</strong> and <strong>Flexbox</strong>.</p>
+                <h3 style="color: #d946ef; margin-top: 2rem;">When to use Flexbox?</h3>
+                <p>I use Flexbox for 1-dimensional layouts. For example, the <strong>Navbar</strong> on this site uses `display: flex` with `justify-content: space-between`. This pushes the Logo to the left and the Links to the right automatically.</p>
+                <h3 style="color: #27c93f; margin-top: 2rem;">When to use Grid?</h3>
+                <p>Grid is for 2-dimensional layouts. The <strong>Tools Section</strong> of Vyntax uses CSS Grid to create responsive columns that adjust to screen size automatically.</p>
+                <p>Stop fighting with floats. Embrace modern CSS layout engines!</p>
+            </div>
+        </div>
+    </section>
+    <footer style="text-align: center; padding: 2rem; color: #94a3b8;">&copy; 2025 Aviral. Built for Developers.</footer>
+</body>
+</html>

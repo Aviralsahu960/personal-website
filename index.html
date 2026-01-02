@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vyntax | Dev Tools</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+       <div class="logo">
+            <img src="vyntax logo.png" alt="Vyntax Logo" class="logo-img">
+       </div>
+       <ul class="nav-links">
+            <li><a href="#tools-section">Tools</a></li>
+            <li><a href="#snippets-section">Snippets</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">About Aviral</a></li>
+        </ul>
+    </nav>
+    
+   <header class="hero">
+    <div class="hero-content">
+        <h1 class="glitch-text">Code Faster. <br>Build Better.</h1>
+        <p class="subtitle">The ultimate collection of developer tools, snippets, and resources designed to speed up your workflow.</p>
+        <div class="cta-group">
+            <button class="btn-main" onclick="document.getElementById('tools-section').scrollIntoView()">Explore Tools</button>
+            <button class="btn-outline" onclick="document.getElementById('snippets-section').scrollIntoView()">View Snippets</button>
+        </div>
+    </div>
+    
+    <div class="hero-visual">
+        <div class="code-card">
+            <div class="card-header">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+            </div>
+            <div class="code-content">
+                <span class="keyword">const</span> <span class="var">vyntax</span> = {<br>
+                &nbsp;&nbsp;status: <span class="string">"Online"</span>,<br>
+                &nbsp;&nbsp;tools: <span class="string">"Unlimited"</span>,<br>
+                &nbsp;&nbsp;speed: <span class="string">"Max"</span><br>
+                };
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="mesh-background">
+
+    <section id="tools-section" class="tools-container">
+        <div class="section-header">
+            <h2>Popular Tools</h2>
+            <p>Generate code in seconds.</p>
+        </div>
+
+        <div class="tool-wrapper">
+            <div class="tool-card">
+                <h3>CSS Box Shadow Generator</h3>
+                <div class="preview-area"><div id="shadow-box"></div></div>
+                <div class="controls">
+                    <div class="control-group"><label>Horizontal Shift</label><input type="range" id="h-shadow" min="-50" max="50" value="10"></div>
+                    <div class="control-group"><label>Vertical Shift</label><input type="range" id="v-shadow" min="-50" max="50" value="10"></div>
+                    <div class="control-group"><label>Blur Radius</label><input type="range" id="blur-radius" min="0" max="100" value="20"></div>
+                    <div class="control-group"><label>Shadow Color</label><input type="color" id="shadow-color" value="#d946ef"></div>
+                </div>
+                <div class="code-output"><span id="shadow-code">box-shadow: 10px 10px 20px #d946ef;</span><button onclick="copyToolCode('shadow-code')">Copy</button></div>
+            </div>
+            <div class="tool-card">
+                <h3>CSS Gradient Generator</h3>
+                <div class="preview-area"><div id="gradient-box"></div></div>
+                <div class="controls">
+                    <div class="control-group"><label>Color 1 (Start)</label><input type="color" id="color1" value="#27c93f"></div>
+                    <div class="control-group"><label>Color 2 (End)</label><input type="color" id="color2" value="#d946ef"></div>
+                    <div class="control-group"><label>Direction</label><select id="direction" onchange="updateGradient()"><option value="to right">Left to Right</option><option value="to bottom">Top to Bottom</option><option value="45deg">Diagonal</option></select></div>
+                </div>
+                <div class="code-output"><span id="gradient-code">background: linear-gradient(...);</span><button onclick="copyToolCode('gradient-code')">Copy</button></div>
+            </div>
+            <div class="tool-card">
+                <h3>Glassmorphism Generator</h3>
+                <div class="preview-area" style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=400'); background-size: cover;">
+                    <div id="glass-box">Glass</div>
+                </div>
+                <div class="controls">
+                    <div class="control-group"><label>Blur Strength</label><input type="range" id="glass-blur" min="0" max="20" value="10"></div>
+                    <div class="control-group"><label>Transparency</label><input type="range" id="glass-opacity" min="0" max="100" value="25"></div>
+                    <div class="control-group"><label>Outline Color</label><input type="color" id="glass-outline" value="#ffffff"></div>
+                </div>
+                <div class="code-output"><span id="glass-code">backdrop-filter: blur(10px);</span><button onclick="copyToolCode('glass-code')">Copy</button></div>
+            </div>
+            <div class="tool-card">
+                <h3>JS Keycode Finder</h3>
+                <div class="preview-area"><h1 id="key-display" style="font-size: 3rem; margin: 0; color:white;">?</h1></div>
+                <div class="controls"><p style="text-align: center; color: #94a3b8; font-size: 0.9rem;">Press any key on your keyboard</p></div>
+                <div class="code-output"><span id="keycode-output">Key Code: -</span><button onclick="copyToolCode('keycode-output')">Copy</button></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="snippets-section" class="snippets-container">
+        <div class="section-title">
+            <h2>Code Snippets</h2>
+            <p>Copy-paste ready components for your next project.</p>
+        </div>
+
+        <div class="snippets-grid">
+            <div class="snippet-card">
+                <div class="snippet-preview"><button class="demo-neon-btn">Vyntax</button></div>
+                <div class="snippet-footer"><h4>Neon Glow Button</h4><button class="copy-snip-btn" onclick="copySnippet('snip1')">Copy Code</button></div>
+                <textarea id="snip1" class="hidden-code">.btn { background: #d946ef; color: white; border: none; padding: 12px 24px; font-weight: bold; border-radius: 8px; box-shadow: 0 0 15px #d946ef; transition: 0.3s; } .btn:hover { box-shadow: 0 0 25px #d946ef, 0 0 5px white; transform: scale(1.05); }</textarea>
+            </div>
+            <div class="snippet-card">
+                <div class="snippet-preview"><div class="demo-loader"></div></div>
+                <div class="snippet-footer"><h4>Simple Spinner</h4><button class="copy-snip-btn" onclick="copySnippet('snip2')">Copy Code</button></div>
+                <textarea id="snip2" class="hidden-code">.loader { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #27c93f; border-radius: 50%; animation: spin 1s linear infinite; } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</textarea>
+            </div>
+            <div class="snippet-card">
+                <div class="snippet-preview" style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=400'); background-size: cover;"><div class="demo-glass">Glass</div></div>
+                <div class="snippet-footer"><h4>Glassmorphism Card</h4><button class="copy-snip-btn" onclick="copySnippet('snip3')">Copy Code</button></div>
+                <textarea id="snip3" class="hidden-code">.glass-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 20px; }</textarea>
+            </div>
+            <div class="snippet-card">
+                <div class="snippet-preview"><h2 class="demo-glitch" data-text="CYBERPUNK">CYBERPUNK</h2></div>
+                <div class="snippet-footer"><h4>Glitch Effect</h4><button class="copy-snip-btn" onclick="copySnippet('snip4')">Copy Code</button></div>
+                <textarea id="snip4" class="hidden-code">.glitch { position: relative; font-size: 2rem; font-weight: bold; color: white; } .glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0f172a; } .glitch::before { left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } .glitch::after { left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } @keyframes glitch { 0% { clip: rect(10px, 9999px, 30px, 0); } 100% { clip: rect(80px, 9999px, 100px, 0); } }</textarea>
+            </div>
+            <div class="snippet-card">
+                <div class="snippet-preview"><div class="demo-gradient-card">HOVER ME</div></div>
+                <div class="snippet-footer"><h4>Gradient Border</h4><button class="copy-snip-btn" onclick="copySnippet('snip5')">Copy Code</button></div>
+                <textarea id="snip5" class="hidden-code">.gradient-box { position: relative; padding: 20px 40px; background: #0f172a; border-radius: 10px; color: white; font-weight: bold; } .gradient-box::before { content: ""; position: absolute; inset: -3px; border-radius: 12px; background: linear-gradient(45deg, #ff00c1, #00fff9); z-index: -1; filter: blur(10px); opacity: 0; transition: opacity 0.3s; } .gradient-box:hover::before { opacity: 1; }</textarea>
+            </div>
+            <div class="snippet-card">
+                <div class="snippet-preview"><div class="demo-typing">Hacking System...</div></div>
+                <div class="snippet-footer"><h4>Typewriter Effect</h4><button class="copy-snip-btn" onclick="copySnippet('snip6')">Copy Code</button></div>
+                <textarea id="snip6" class="hidden-code">.typing { width: 16ch; white-space: nowrap; overflow: hidden; border-right: 3px solid #27c93f; font-family: monospace; font-size: 1.5rem; animation: typing 2s steps(16), blink .5s step-end infinite alternate; } @keyframes typing { from { width: 0; } } @keyframes blink { 50% { border-color: transparent; } }</textarea>
+            </div>
+        </div>
+    </section>
+
+</div> <script src="script.js"></script>
+</body>
+</html>
