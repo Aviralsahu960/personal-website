@@ -3,7 +3,7 @@
 Welcome to my personal portfolio repository! This website showcases my projects, skills, and background as a Computer Science student.
 
 ##  Live Demo
-**Click here to view the website:** 
+**Click here to view the website:** https://vyntax960.netlify.app/
 
 ##  Built With
 * **HTML5** - For structure
@@ -21,5 +21,6 @@ Welcome to my personal portfolio repository! This website showcases my projects,
 * GitHub: [@Aviralsahu960](https://github.com/Aviralsahu960)
 * LinkedIn: [Aviral Sahu](https://www.linkedin.com/in/aviral-sahu-7b2aab371/)
   
+
 
 
