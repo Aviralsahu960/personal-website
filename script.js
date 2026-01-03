@@ -1,92 +1,105 @@
 /* =========================================
    1. TOOLS LOGIC (Shadow, Gradient, Glass, Keycode)
    ========================================= */
-const hShadow = document.getElementById('h-shadow');
-const vShadow = document.getElementById('v-shadow');
-const blurRadius = document.getElementById('blur-radius');
-const shadowColor = document.getElementById('shadow-color');
-const shadowBox = document.getElementById('shadow-box');
-const shadowCode = document.getElementById('shadow-code');
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- Box Shadow Generator ---
+    const hShadow = document.getElementById('h-shadow');
+    const vShadow = document.getElementById('v-shadow');
+    const blurRadius = document.getElementById('blur-radius');
+    const shadowColor = document.getElementById('shadow-color');
+    const shadowBox = document.getElementById('shadow-box');
+    const shadowCode = document.getElementById('shadow-code');
 
-if(hShadow) {
-    function updateShadow() {
-        if (!shadowBox) return; 
-        const val = `${hShadow.value}px ${vShadow.value}px ${blurRadius.value}px ${shadowColor.value}`;
-        shadowBox.style.boxShadow = val;
-        shadowCode.innerText = `box-shadow: ${val};`;
+    if(hShadow && shadowBox) {
+        function updateShadow() {
+            const val = `${hShadow.value}px ${vShadow.value}px ${blurRadius.value}px ${shadowColor.value}`;
+            shadowBox.style.boxShadow = val;
+            shadowCode.innerText = `box-shadow: ${val};`;
+        }
+        [hShadow, vShadow, blurRadius, shadowColor].forEach(input => {
+            input.addEventListener('input', updateShadow);
+        });
+        updateShadow(); // Initialize
     }
-    [hShadow, vShadow, blurRadius, shadowColor].forEach(input => {
-        input.addEventListener('input', updateShadow);
+
+    // --- Gradient Generator ---
+    const color1 = document.getElementById('color1');
+    const color2 = document.getElementById('color2');
+    const direction = document.getElementById('direction');
+    const gradientBox = document.getElementById('gradient-box');
+    const gradientCode = document.getElementById('gradient-code');
+
+    if(color1 && gradientBox) {
+        function updateGradient() {
+            const val = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value})`;
+            gradientBox.style.background = val;
+            gradientCode.innerText = `background: ${val};`;
+        }
+        [color1, color2, direction].forEach(input => {
+            input.addEventListener('input', updateGradient);
+            input.addEventListener('change', updateGradient);
+        });
+        updateGradient(); 
+    }
+
+    // --- Glassmorphism Generator ---
+    const glassBlur = document.getElementById('glass-blur');
+    const glassOpacity = document.getElementById('glass-opacity');
+    const glassOutline = document.getElementById('glass-outline');
+    const glassBox = document.getElementById('glass-box');
+    const glassCode = document.getElementById('glass-code');
+
+    if(glassBlur && glassBox) {
+        function updateGlass() {
+            const opac = glassOpacity.value / 100;
+            const bgStyle = `rgba(255, 255, 255, ${opac})`;
+            glassBox.style.background = bgStyle;
+            glassBox.style.backdropFilter = `blur(${glassBlur.value}px)`;
+            glassBox.style.border = `1px solid ${glassOutline.value}`;
+            glassCode.innerText = `background: ${bgStyle}; backdrop-filter: blur(${glassBlur.value}px); border: 1px solid ${glassOutline.value};`;
+        }
+        [glassBlur, glassOpacity, glassOutline].forEach(input => {
+            input.addEventListener('input', updateGlass);
+        });
+        updateGlass();
+    }
+
+    // --- Keycode Finder ---
+    window.addEventListener('keydown', (e) => {
+        const keyDisplay = document.getElementById('key-display');
+        const keyOutput = document.getElementById('keycode-output');
+        if (keyDisplay && keyOutput) {
+            keyDisplay.innerText = e.key === " " ? "Space" : e.key;
+            keyOutput.innerText = e.keyCode; // Deprecated but matches video functionality
+        }
     });
-}
 
-const color1 = document.getElementById('color1');
-const color2 = document.getElementById('color2');
-const direction = document.getElementById('direction');
-const gradientBox = document.getElementById('gradient-box');
-const gradientCode = document.getElementById('gradient-code');
-
-if(color1) {
-    function updateGradient() {
-        if (!gradientBox) return;
-        const val = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value})`;
-        gradientBox.style.background = val;
-        gradientCode.innerText = `background: ${val};`;
-    }
-    [color1, color2, direction].forEach(input => {
-        input.addEventListener('input', updateGradient);
-        input.addEventListener('change', updateGradient);
-    });
-    updateGradient(); 
-}
-
-const glassBlur = document.getElementById('glass-blur');
-const glassOpacity = document.getElementById('glass-opacity');
-const glassOutline = document.getElementById('glass-outline');
-const glassBox = document.getElementById('glass-box');
-const glassCode = document.getElementById('glass-code');
-
-if(glassBlur) {
-    function updateGlass() {
-        if (!glassBox) return;
-        const opac = glassOpacity.value / 100;
-        const bgStyle = `rgba(255, 255, 255, ${opac})`;
-        glassBox.style.background = bgStyle;
-        glassBox.style.backdropFilter = `blur(${glassBlur.value}px)`;
-        glassBox.style.border = `1px solid ${glassOutline.value}`;
-        glassCode.innerText = `background: ${bgStyle}; backdrop-filter: blur(${glassBlur.value}px); border: 1px solid ${glassOutline.value};`;
-    }
-    [glassBlur, glassOpacity, glassOutline].forEach(input => {
-        input.addEventListener('input', updateGlass);
-    });
-    updateGlass();
-}
-
-window.addEventListener('keydown', (e) => {
-    const keyDisplay = document.getElementById('key-display');
-    const keyOutput = document.getElementById('keycode-output');
-    if (keyDisplay && keyOutput) {
-        keyDisplay.innerText = e.key === " " ? "Space" : e.key;
-        keyOutput.innerText = e.keyCode;
-    }
+    // --- Canvas Animations (Hyperspeed & Grid) ---
+    initHyperspeed();
+    initGridMotion();
 });
 
-function copyToolCode(elementId) {
+// Helper Functions
+window.copyToolCode = function(elementId) {
     const element = document.getElementById(elementId);
     if (!element) return;
     navigator.clipboard.writeText(element.innerText).then(() => alert("Code Copied!"));
 }
 
-function copySnippet(id) {
+window.copySnippet = function(id) {
     const text = document.getElementById(id).value;
     navigator.clipboard.writeText(text).then(() => alert("Snippet Copied!"));
 }
 
 /* =========================================
-   2. HYPERSPEED (Blog Page)
+   2. CANVAS ANIMATIONS
    ========================================= */
-const hCanvas = document.getElementById('hyperspeed-canvas');
-if (hCanvas) {
+
+function initHyperspeed() {
+    const hCanvas = document.getElementById('hyperspeed-canvas');
+    if (!hCanvas) return;
+
     const ctx = hCanvas.getContext('2d');
     let width, height;
     let stars = [];
@@ -122,7 +135,7 @@ if (hCanvas) {
             let size = (width - this.z) / width * 3;
             ctx.fillStyle = '#fff';
             ctx.beginPath();
-            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.arc(x, y, Math.max(0, size), 0, Math.PI * 2);
             ctx.fill();
         }
     }
@@ -137,11 +150,10 @@ if (hCanvas) {
     animateH();
 }
 
-/* =========================================
-   3. GRID MOTION (About Page)
-   ========================================= */
-const gCanvas = document.getElementById('grid-canvas');
-if (gCanvas) {
+function initGridMotion() {
+    const gCanvas = document.getElementById('grid-canvas');
+    if (!gCanvas) return;
+
     const ctx = gCanvas.getContext('2d');
     let w, h;
     let time = 0;
