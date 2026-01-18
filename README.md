@@ -19,8 +19,9 @@ Welcome to my personal portfolio repository! This website showcases my projects,
 ##  Author
 **Aviral Sahu**
 * GitHub: [@Aviralsahu960](https://github.com/Aviralsahu960)
-* LinkedIn: [Aviral Sahu](https://www.linkedin.com/in/aviral-sahu-7b2aab371/)
+* LinkedIn: [Aviral Sahu](https://www.linkedin.com/in/aviral-sahu-vyntaxdev/)
   
+
 
 
 
