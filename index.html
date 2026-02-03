@@ -9,9 +9,12 @@
 </head>
 <body>
 
+    <div class="cursor-ring" data-cursor-ring></div>
+    <div class="cursor-dot" data-cursor-dot></div>
+
     <nav class="navbar">
        <div class="logo">
-            <img src="vyntax logo.png" alt="Vyntax Logo" class="logo-img">
+            <img src="vyntax-logo.png" alt="Vyntax-Logo" class="logo-img">
        </div>
        <ul class="nav-links">
             <li><a href="#tools-section">Tools</a></li>
@@ -22,7 +25,7 @@
     </nav>
     
    <header class="hero">
-    <div class="hero-content">
+    <div class="hero-content reveal">
         <h1 class="glitch-text">Code Faster. <br>Build Better.</h1>
         <p class="subtitle">The ultimate collection of developer tools, snippets, and resources designed to speed up your workflow.</p>
         <div class="cta-group">
@@ -48,10 +51,27 @@
         </div>
     </div>
 </header>
+<section class="features-section">
+    <div class="feature-box">
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning Fast</h3>
+        <p>No bloat. Just pure HTML, CSS, and JS tools that run instantly.</p>
+    </div>
+    <div class="feature-box">
+        <div class="feature-icon">🎨</div>
+        <h3>Modern UI</h3>
+        <p>Glassmorphism, Neon, and Dark Mode styles ready to copy-paste.</p>
+    </div>
+    <div class="feature-box">
+        <div class="feature-icon">💻</div>
+        <h3>Developer First</h3>
+        <p>Built by a developer to solve actual daily coding headaches.</p>
+    </div>
+</section>
 
 <div class="mesh-background">
 
-    <section id="tools-section" class="tools-container">
+    <section id="tools-section" class="tools-container reveal">
         <div class="section-header">
             <h2>Popular Tools</h2>
             <p>Generate code in seconds.</p>
@@ -100,7 +120,7 @@
         </div>
     </section>
 
-    <section id="snippets-section" class="snippets-container">
+    <section id="snippets-section" class="snippets-container reveal">
         <div class="section-title">
             <h2>Code Snippets</h2>
             <p>Copy-paste ready components for your next project.</p>
@@ -125,7 +145,7 @@
             <div class="snippet-card">
                 <div class="snippet-preview"><h2 class="demo-glitch" data-text="CYBERPUNK">CYBERPUNK</h2></div>
                 <div class="snippet-footer"><h4>Glitch Effect</h4><button class="copy-snip-btn" onclick="copySnippet('snip4')">Copy Code</button></div>
-                <textarea id="snip4" class="hidden-code">.glitch { position: relative; font-size: 2rem; font-weight: bold; color: white; } .glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0f172a; } .glitch::before { left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } .glitch::after { left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } @keyframes glitch { 0% { clip: rect(10px, 9999px, 30px, 0); } 100% { clip: rect(80px, 9999px, 100px, 0); } }</textarea>
+                <textarea id="snip4" class="hidden-code">.glitch { position: relative; font-size: 2rem; font-weight: bold; color: white; } .glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0f172a; } .glitch::before { left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(24px, 550px, 90px, 0); animation: glitch 2s infinite linear alternate-reverse; } .glitch::after { left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } @keyframes glitch { 0% { clip: rect(10px, 9999px, 30px, 0); } 100% { clip: rect(80px, 9999px, 100px, 0); } }</textarea>
             </div>
             <div class="snippet-card">
                 <div class="snippet-preview"><div class="demo-gradient-card">HOVER ME</div></div>
@@ -140,6 +160,30 @@
         </div>
     </section>
 
-</div> <script src="script.js"></script>
+</div> 
+<script src="script.js"></script>
 </body>
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-brand">
+            <img src="vyntax logo.png" alt="Vyntax" class="footer-logo">
+            <p>Built for developers, by a developer.</p>
+        </div>
+        <div class="footer-links">
+            <h3>Quick Links</h3>
+            <a href="#tools-section">Tools</a>
+            <a href="#snippets-section">Snippets</a>
+            <a href="blog.html">Blog</a>
+            <a href="about.html">About</a>
+        </div>
+        <div class="footer-social">
+            <h3>Connect</h3>
+            <a href="https://github.com/Aviralsahu960" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/aviral-sahu-vyntaxdev/" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 Vyntax. All rights reserved.
+    </div>
+</footer>
 </html>
