@@ -169,13 +169,42 @@ h1 {
 .var { color: #fff; }
 .string { color: #27c93f; }
 
+/* Features Section (Added from Upgrade) */
+.features-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 4rem 10%;
+    background: #020617;
+    position: relative;
+    z-index: 5;
+    flex-wrap: wrap;
+}
+.feature-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+    transition: transform 0.3s;
+}
+.feature-box:hover {
+    transform: translateY(-10px);
+    border-color: #27c93f;
+    background: rgba(39, 201, 63, 0.05);
+}
+.feature-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.feature-box h3 { color: white; margin-bottom: 0.5rem; }
+.feature-box p { color: #94a3b8; font-size: 0.9rem; line-height: 1.6; }
+
 /* =========================================
-   4. BACKGROUND MESH (Midnight Blue & Peacock Green)
+   4. BACKGROUND MESH
    ========================================= */
 .mesh-background {
     position: relative;
     width: 100%;
-    /* Dark base with Peacock Green (left) and Midnight Blue (right) glowing spots */
     background-color: #020617;
     background-image: 
         radial-gradient(circle at 15% 40%, rgba(39, 201, 63, 0.15), transparent 40%),
@@ -200,31 +229,33 @@ h1 {
 }
 .section-header h2 { font-size: 2.5rem; margin-bottom: 0.5rem; color: white; }
 
-/* --- TOOLS LAYOUT FIXED (Center Column) --- */
+/* --- TOOLS LAYOUT FIXED (Rectangular & Stacked) --- */
 .tool-wrapper {
-    display: flex;             /* Changed from Grid to Flex */
-    flex-direction: column;    /* Stack vertically */
-    align-items: center;       /* Center align */
-    gap: 4rem;                 /* Space between tools */
+    display: flex;
+    flex-direction: column;    /* Stacks tools one below another */
+    align-items: center;       /* Centers them in the middle of the screen */
+    gap: 6rem;                 /* Big space between tools */
     width: 100%;
+    margin-top: 2rem;
 }
 
 .tool-card {
     background: #0f172a; 
     border: 1px solid #334155;
-    border-radius: 12px;
-    padding: 1.5rem;
+    border-radius: 16px;       /* Slightly rounder corners */
+    padding: 2.5rem;           /* More internal space */
     width: 100%;
-    max-width: 500px;          /* Keep the container size same */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    max-width: 750px;          /* Wide RECTANGLE shape */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    position: relative;
 }
 
 /* Tool Previews */
 .preview-area {
     background: #020617;
-    height: 180px;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
+    height: 200px;             
+    border-radius: 12px;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -233,30 +264,46 @@ h1 {
 }
 
 /* Specific Preview Elements */
-#shadow-box {
-    width: 80px; height: 80px; background: #fff; border-radius: 12px;
-}
+#shadow-box { width: 80px; height: 80px; background: #fff; border-radius: 12px; }
 #gradient-box { width: 100%; height: 100%; }
-#glass-box {
-    padding: 20px 40px; color: white; font-weight: bold; font-family: 'Inter', sans-serif; border-radius: 12px;
-}
+#glass-box { padding: 20px 40px; color: white; font-weight: bold; font-family: 'Inter', sans-serif; border-radius: 12px; }
 
 /* Controls */
 .controls { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
 .control-group { display: flex; justify-content: space-between; align-items: center; }
 .control-group label { color: #94a3b8; font-size: 0.9rem; }
-
 input[type=range] { accent-color: #d946ef; cursor: pointer; }
 
+/* FIXED Code Output (Handles long text & button color) */
 .code-output {
-    background: #1e293b; padding: 10px; border-radius: 6px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #27c93f;
+    background: #1e293b; 
+    padding: 10px; 
+    border-radius: 6px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace; 
+    font-size: 0.8rem; 
+    color: #27c93f;
+    gap: 10px; /* Space between text and button */
+}
+.code-output span {
+    word-break: break-all; /* Prevents text from pushing button out */
+    flex-grow: 1;
 }
 .code-output button {
-    background: #d946ef; border: none; color: white; padding: 4px 10px;
-    border-radius: 4px; cursor: pointer; font-size: 0.75rem;
+    background: #d946ef; 
+    border: none; 
+    color: white; 
+    padding: 6px 14px;
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 0.75rem;
+    flex-shrink: 0; /* Ensures button never shrinks/disappears */
+    white-space: nowrap;
+    font-weight: bold;
 }
+.code-output button:hover { background: #c026d3; }
 
 /* --- SNIPPETS SECTION --- */
 .snippets-grid, .blog-grid {
@@ -283,9 +330,7 @@ input[type=range] { accent-color: #d946ef; cursor: pointer; }
     position: relative;
     overflow: hidden;
 }
-.snippet-footer {
-    padding: 1.5rem; display: flex; justify-content: space-between; align-items: center;
-}
+.snippet-footer { padding: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
 .snippet-footer h4 { margin: 0; color: #e2e8f0; }
 .copy-snip-btn {
     background: transparent; border: 1px solid #334155; color: #94a3b8;
@@ -294,253 +339,109 @@ input[type=range] { accent-color: #d946ef; cursor: pointer; }
 .copy-snip-btn:hover { border-color: #d946ef; color: #d946ef; }
 .hidden-code { display: none; }
 
-/* --- SNIPPET DEMOS (FIXED) --- */
-
-/* 1. Neon Button */
-.demo-neon-btn {
-    background: #d946ef; color: white; border: none; padding: 10px 20px;
-    border-radius: 8px; box-shadow: 0 0 15px #d946ef; font-weight: bold;
-}
-
-/* 2. Loader */
-.demo-loader {
-    width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1);
-    border-top: 3px solid #27c93f; border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
+/* Snippet Demos */
+.demo-neon-btn { background: #d946ef; color: white; border: none; padding: 10px 20px; border-radius: 8px; box-shadow: 0 0 15px #d946ef; font-weight: bold; }
+.demo-loader { width: 30px; height: 30px; border: 3px solid rgba(255,255,255,0.1); border-top: 3px solid #27c93f; border-radius: 50%; animation: spin 1s linear infinite; }
 @keyframes spin { 100% { transform: rotate(360deg); } }
+.demo-glass { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); }
 
-/* 3. Glass Card */
-.demo-glass {
-    background: rgba(255,255,255,0.1); padding: 10px 20px;
-    border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px);
-}
+/* Glitch Fix */
+.demo-glitch { position: relative; font-size: 1.8rem; font-weight: 800; color: white; text-transform: uppercase; }
+.demo-glitch::before, .demo-glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a0a; }
+.demo-glitch::before { left: 2px; text-shadow: -2px 0 #ff00c1; clip: rect(24px, 550px, 90px, 0); animation: glitch-anim-1 2.5s infinite linear alternate-reverse; }
+.demo-glitch::after { left: -2px; text-shadow: -2px 0 #00fff9; clip: rect(85px, 550px, 140px, 0); animation: glitch-anim-2 3s infinite linear alternate-reverse; }
+@keyframes glitch-anim-1 { 0% { clip: rect(20px, 9999px, 10px, 0); } 100% { clip: rect(50px, 9999px, 20px, 0); } }
+@keyframes glitch-anim-2 { 0% { clip: rect(90px, 9999px, 100px, 0); } 100% { clip: rect(40px, 9999px, 90px, 0); } }
 
-/* 4. Glitch Effect (FIXED: More Intense) */
-.demo-glitch {
-    position: relative;
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: white;
-    text-transform: uppercase;
-}
-.demo-glitch::before, .demo-glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: #0a0a0a; /* Matches snippet background */
-}
-.demo-glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 #ff00c1;
-    clip: rect(24px, 550px, 90px, 0);
-    animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
-}
-.demo-glitch::after {
-    left: -2px;
-    text-shadow: -2px 0 #00fff9;
-    clip: rect(85px, 550px, 140px, 0);
-    animation: glitch-anim-2 3s infinite linear alternate-reverse;
-}
-@keyframes glitch-anim-1 {
-    0% { clip: rect(20px, 9999px, 10px, 0); }
-    20% { clip: rect(60px, 9999px, 70px, 0); }
-    40% { clip: rect(10px, 9999px, 50px, 0); }
-    60% { clip: rect(80px, 9999px, 90px, 0); }
-    80% { clip: rect(30px, 9999px, 40px, 0); }
-    100% { clip: rect(50px, 9999px, 20px, 0); }
-}
-@keyframes glitch-anim-2 {
-    0% { clip: rect(90px, 9999px, 100px, 0); }
-    20% { clip: rect(10px, 9999px, 30px, 0); }
-    40% { clip: rect(50px, 9999px, 20px, 0); }
-    60% { clip: rect(20px, 9999px, 60px, 0); }
-    80% { clip: rect(70px, 9999px, 10px, 0); }
-    100% { clip: rect(40px, 9999px, 90px, 0); }
-}
+/* Gradient Glow Fix */
+.demo-gradient-card { position: relative; background: #0f172a; padding: 12px 24px; border-radius: 8px; color: white; font-weight: bold; text-transform: uppercase; z-index: 1; }
+.demo-gradient-card::before { content: ""; position: absolute; inset: -2px; z-index: -1; background: linear-gradient(45deg, #ff00c1, #00fff9, #ff00c1); background-size: 200%; border-radius: 10px; filter: blur(5px); opacity: 0; transition: opacity 0.3s ease; animation: glowing 3s linear infinite; }
+.demo-gradient-card:hover::before { opacity: 1; }
+.demo-gradient-card::after { content: ""; position: absolute; inset: 0; z-index: -1; background: #0f172a; border-radius: 8px; }
+@keyframes glowing { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-/* 5. Gradient Border Glow (FIXED: Real Glow Effect) */
-.demo-gradient-card {
-    position: relative;
-    background: #0f172a;
-    padding: 12px 24px;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    z-index: 1;
-}
-.demo-gradient-card::before {
-    content: "";
-    position: absolute;
-    inset: -2px; /* Border thickness */
-    z-index: -1;
-    background: linear-gradient(45deg, #ff00c1, #00fff9, #ff00c1);
-    background-size: 200%;
-    border-radius: 10px;
-    filter: blur(5px); /* The glow */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    animation: glowing 3s linear infinite;
-}
-.demo-gradient-card:hover::before {
-    opacity: 1; /* Shows glow on hover */
-}
-.demo-gradient-card::after {
-    /* Inner black box to hide the gradient center */
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: #0f172a;
-    border-radius: 8px;
-}
-@keyframes glowing {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* 6. Hacking Effect (FIXED: Green Color) */
-.demo-typing {
-    font-family: 'JetBrains Mono', monospace;
-    border-right: 2px solid #27c93f;
-    color: #27c93f; /* Bright green text */
-    font-size: 1.1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 15ch;
-    animation: typing 3s steps(15), blink .5s step-end infinite alternate;
-}
+/* Hacking Text Fix */
+.demo-typing { font-family: 'JetBrains Mono', monospace; border-right: 2px solid #27c93f; color: #27c93f; font-size: 1.1rem; white-space: nowrap; overflow: hidden; width: 15ch; animation: typing 3s steps(15), blink .5s step-end infinite alternate; }
 @keyframes typing { from { width: 0; } }
 @keyframes blink { 50% { border-color: transparent; } }
 
 /* =========================================
-   6. BLOG & ABOUT (Unchanged)
+   6. FOOTER (New)
+   ========================================= */
+.site-footer {
+    background: #020617;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 4rem 10% 2rem;
+    margin-top: 4rem;
+    position: relative;
+    z-index: 10;
+}
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+.footer-logo { height: 30px; margin-bottom: 1rem; }
+.footer-links h3, .footer-social h3 { color: #27c93f; font-size: 1rem; margin-bottom: 1rem; }
+.footer-links a, .footer-social a { display: block; color: #94a3b8; text-decoration: none; margin-bottom: 0.5rem; transition: 0.3s; }
+.footer-links a:hover, .footer-social a:hover { color: #d946ef; padding-left: 5px; }
+.footer-bottom { text-align: center; color: #64748b; font-size: 0.9rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); }
+
+/* Scroll Reveal */
+.reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* =========================================
+   7. BLOG & ABOUT
    ========================================= */
 .blog-hero { padding: 8rem 10% 4rem; text-align: center; }
-.blog-card { 
-    background: rgba(15, 23, 42, 0.6); 
-    backdrop-filter: blur(10px);
-    border-radius: 16px; overflow: hidden; 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    display: flex; flex-direction: column;
-}
+.blog-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column; }
 .card-image { height: 200px; background-size: cover; background-position: center; }
 .card-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-.category { 
-    color: #27c93f; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; 
-    letter-spacing: 1px; margin-bottom: 0.5rem; display: block;
-}
+.category { color: #27c93f; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; display: block; }
 .read-more { margin-top: auto; color: #d946ef; text-decoration: none; font-weight: 600; }
 
 .about-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
-.profile-card { 
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 3rem; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); max-width: 700px; text-align: center; 
-}
-.profile-img {
-    width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-    margin: 0 auto 1.5rem; display: block;
-    border: 3px solid #d946ef; box-shadow: 0 0 20px rgba(217, 70, 239, 0.4); 
-}
-.grid-container { 
-    max-width: 1000px; margin: 0 auto; 
-    display: grid; grid-template-columns: 1fr 1fr; 
-    gap: 4rem; padding: 4rem 2rem; 
-}
+.profile-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); padding: 3rem; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); max-width: 700px; text-align: center; }
+.profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.5rem; display: block; border: 3px solid #d946ef; box-shadow: 0 0 20px rgba(217, 70, 239, 0.4); }
+.grid-container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 4rem 2rem; }
 .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
 .skill-tag { background: #1e293b; padding: 8px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
 .edu-card { background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; }
 
 /* Backgrounds */
-#hyperspeed-canvas, #grid-canvas {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -999; background: #020617; 
-}
+#hyperspeed-canvas, #grid-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -999; background: #020617; }
 
 /* =========================================
-   7. MOBILE RESPONSIVENESS (Optimized)
+   8. MOBILE RESPONSIVENESS (Optimized)
    ========================================= */
 @media screen and (max-width: 768px) {
-    
-    /* 1. Global Scaling */
-    html { font-size: 13px; } /* Slightly smaller text for compact feel */
-    
-    /* 2. Compact Navbar (Logo Left, Links Right) */
-    .navbar {
-        flex-direction: row; /* Keep them side-by-side */
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 5%; /* Smaller padding */
-        gap: 0;
-    }
-
-    .logo-img { height: 32px; } /* Smaller logo */
-
-    .nav-links {
-        flex-direction: row; /* Links stay horizontal */
-        width: auto;
-        gap: 15px; /* Space between Blog and About */
-        margin: 0;
-    }
-
-    /* HIDE 'Tools' and 'Snippets' links in Navbar on Mobile to save space */
-    .nav-links li:nth-child(1), 
-    .nav-links li:nth-child(2) {
-        display: none;
-    }
-
-    .nav-links a {
-        padding: 6px 10px;
-        font-size: 0.9rem;
-        background: transparent; /* Remove background block for cleaner look */
-    }
-
-    /* 3. Hero Section Compact */
-    .hero {
-        min-height: auto; /* Allow height to shrink to content */
-        padding: 6rem 5% 3rem; /* Tighter padding */
-        gap: 2rem;
-    }
-    
+    html { font-size: 13px; } 
+    .navbar { flex-direction: row; justify-content: space-between; align-items: center; padding: 1rem 5%; gap: 0; }
+    .logo-img { height: 32px; } 
+    .nav-links { flex-direction: row; width: auto; gap: 15px; margin: 0; }
+    .nav-links li:nth-child(1), .nav-links li:nth-child(2) { display: none; }
+    .nav-links a { padding: 6px 10px; font-size: 0.9rem; background: transparent; }
+    .hero { min-height: auto; padding: 6rem 5% 3rem; gap: 2rem; flex-direction: column; text-align: center; }
+    .hero-content { max-width: 100%; margin-bottom: 2rem; }
     h1 { font-size: 2.2rem; line-height: 1.1; }
     .subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
-
-    /* 4. Tools & Snippets: Prevent Overflooding */
-    .tools-container, .snippets-container, .blog-container {
-        padding: 3rem 5%; /* Less whitespace on sides */
-    }
-
+    .tools-container, .snippets-container, .blog-container { padding: 3rem 5%; }
     .section-header h2 { font-size: 1.8rem; }
     
-    /* Make Tools Stack Compactly */
-    .tool-wrapper {
-        gap: 2rem; /* Reduce gap between tools */
-    }
-    
-    .tool-card {
-        padding: 1.2rem; /* Smaller internal padding */
-    }
+    /* Tools Mobile */
+    .tool-wrapper { gap: 2rem; }
+    .tool-card { padding: 1.2rem; }
 
-    /* Make Snippets Grid 1 Column but Compact */
-    .snippets-grid {
-        grid-template-columns: 1fr; /* Single column */
-        gap: 1.5rem;
-    }
+    /* Snippets Mobile */
+    .snippets-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     
-    /* 5. Hide complex 3D hover effects on mobile to prevent glitches */
-    .code-card {
-        transform: none !important;
-        width: 100%;
-        padding: 1.5rem;
-    }
-    
-    /* 6. Profile Card (About Page) */
-    .grid-container {
-        display: flex;
-        flex-direction: column;
-        padding: 2rem 1rem;
-        gap: 2rem;
-    }
+    /* 3D Card Mobile */
+    .hero-visual { width: 100%; display: flex; justify-content: center; margin-top: 2rem; }
+    .code-card { transform: none !important; width: 100%; padding: 1.5rem; max-width: 320px; margin: 0; }
+
+    /* About Mobile */
+    .grid-container { display: flex; flex-direction: column; padding: 2rem 1rem; gap: 2rem; }
+    .profile-card { padding: 2rem 1.5rem; width: 100%; box-sizing: border-box; }
 }
