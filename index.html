@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vyntax | Dev Tools</title>
+    <title>Vyntax | Dev Tools & Resources</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP and ScrollTrigger for scroll animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
-
-    <div class="cursor-ring" data-cursor-ring></div>
-    <div class="cursor-dot" data-cursor-dot></div>
+    <!-- Geometric Parallax Background -->
+    <canvas id="geometric-bg"></canvas>
 
     <nav class="navbar">
        <div class="logo">
@@ -19,22 +22,23 @@
        <ul class="nav-links">
             <li><a href="#tools-section">Tools</a></li>
             <li><a href="#snippets-section">Snippets</a></li>
+            <li><a href="#resources-section">Resources</a></li>
             <li><a href="blog.html">Blog</a></li>
-            <li><a href="about.html">About Aviral</a></li>
+            <li><a href="about.html">About</a></li>
         </ul>
     </nav>
     
    <header class="hero">
-    <div class="hero-content reveal">
-        <h1 class="glitch-text">Code Faster. <br>Build Better.</h1>
-        <p class="subtitle">The ultimate collection of developer tools, snippets, and resources designed to speed up your workflow.</p>
-        <div class="cta-group">
-            <button class="btn-main" onclick="document.getElementById('tools-section').scrollIntoView()">Explore Tools</button>
-            <button class="btn-outline" onclick="document.getElementById('snippets-section').scrollIntoView()">View Snippets</button>
+    <div class="hero-content fade-in-up">
+        <h1 class="glitch-text split-text">Code Faster. <br>Build Better.</h1>
+        <p class="subtitle fade-in-delay">The ultimate collection of developer tools, snippets, resources, and learning paths designed to supercharge your workflow.</p>
+        <div class="cta-group fade-in-delay-2">
+            <button class="btn-main" onclick="document.getElementById('tools-section').scrollIntoView({behavior: 'smooth'})">Explore Tools</button>
+            <button class="btn-outline" onclick="document.getElementById('resources-section').scrollIntoView({behavior: 'smooth'})">Browse Resources</button>
         </div>
     </div>
     
-    <div class="hero-visual">
+    <div class="hero-visual parallax-element">
         <div class="code-card">
             <div class="card-header">
                 <span class="dot red"></span>
@@ -45,40 +49,26 @@
                 <span class="keyword">const</span> <span class="var">vyntax</span> = {<br>
                 &nbsp;&nbsp;status: <span class="string">"Online"</span>,<br>
                 &nbsp;&nbsp;tools: <span class="string">"Unlimited"</span>,<br>
+                &nbsp;&nbsp;resources: <span class="string">"Endless"</span>,<br>
                 &nbsp;&nbsp;speed: <span class="string">"Max"</span><br>
                 };
             </div>
         </div>
     </div>
 </header>
-<section class="features-section">
-    <div class="feature-box">
-        <div class="feature-icon">⚡</div>
-        <h3>Lightning Fast</h3>
-        <p>No bloat. Just pure HTML, CSS, and JS tools that run instantly.</p>
-    </div>
-    <div class="feature-box">
-        <div class="feature-icon">🎨</div>
-        <h3>Modern UI</h3>
-        <p>Glassmorphism, Neon, and Dark Mode styles ready to copy-paste.</p>
-    </div>
-    <div class="feature-box">
-        <div class="feature-icon">💻</div>
-        <h3>Developer First</h3>
-        <p>Built by a developer to solve actual daily coding headaches.</p>
-    </div>
-</section>
 
 <div class="mesh-background">
 
-    <section id="tools-section" class="tools-container reveal">
-        <div class="section-header">
-            <h2>Popular Tools</h2>
-            <p>Generate code in seconds.</p>
+    <!-- TOOLS SECTION -->
+    <section id="tools-section" class="tools-container scroll-section">
+        <div class="section-header fade-in-scroll">
+            <h2>Developer Tools</h2>
+            <p>Generate code in seconds. Build faster.</p>
         </div>
 
         <div class="tool-wrapper">
-            <div class="tool-card">
+            <!-- Each tool card will slide in from the side -->
+            <div class="tool-card slide-in-left">
                 <h3>CSS Box Shadow Generator</h3>
                 <div class="preview-area"><div id="shadow-box"></div></div>
                 <div class="controls">
@@ -89,7 +79,8 @@
                 </div>
                 <div class="code-output"><span id="shadow-code">box-shadow: 10px 10px 20px #d946ef;</span><button onclick="copyToolCode('shadow-code')">Copy</button></div>
             </div>
-            <div class="tool-card">
+
+            <div class="tool-card slide-in-right">
                 <h3>CSS Gradient Generator</h3>
                 <div class="preview-area"><div id="gradient-box"></div></div>
                 <div class="controls">
@@ -99,7 +90,8 @@
                 </div>
                 <div class="code-output"><span id="gradient-code">background: linear-gradient(...);</span><button onclick="copyToolCode('gradient-code')">Copy</button></div>
             </div>
-            <div class="tool-card">
+
+            <div class="tool-card slide-in-left">
                 <h3>Glassmorphism Generator</h3>
                 <div class="preview-area" style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=400'); background-size: cover;">
                     <div id="glass-box">Glass</div>
@@ -111,7 +103,53 @@
                 </div>
                 <div class="code-output"><span id="glass-code">backdrop-filter: blur(10px);</span><button onclick="copyToolCode('glass-code')">Copy</button></div>
             </div>
-            <div class="tool-card">
+
+            <div class="tool-card slide-in-right">
+                <h3>Color Palette Generator</h3>
+                <div class="preview-area" id="palette-preview" style="display: flex; gap: 5px; padding: 10px;">
+                    <div class="palette-color" style="flex: 1; border-radius: 8px;"></div>
+                    <div class="palette-color" style="flex: 1; border-radius: 8px;"></div>
+                    <div class="palette-color" style="flex: 1; border-radius: 8px;"></div>
+                    <div class="palette-color" style="flex: 1; border-radius: 8px;"></div>
+                    <div class="palette-color" style="flex: 1; border-radius: 8px;"></div>
+                </div>
+                <div class="controls">
+                    <div class="control-group"><label>Base Color</label><input type="color" id="base-color" value="#d946ef"></div>
+                    <button class="btn-main" onclick="generatePalette()" style="margin-top: 10px; width: 100%;">Generate Palette</button>
+                </div>
+                <div class="code-output"><span id="palette-code">Click generate to create a palette</span><button onclick="copyToolCode('palette-code')">Copy</button></div>
+            </div>
+
+            <div class="tool-card slide-in-left">
+                <h3>Lorem Ipsum Generator</h3>
+                <div class="preview-area" style="display: block; padding: 15px; overflow-y: auto;">
+                    <p id="lorem-output" style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6; margin: 0;">Click generate to create placeholder text...</p>
+                </div>
+                <div class="controls">
+                    <div class="control-group"><label>Paragraphs</label><input type="range" id="lorem-count" min="1" max="5" value="3"></div>
+                    <button class="btn-main" onclick="generateLorem()" style="margin-top: 10px; width: 100%;">Generate Text</button>
+                </div>
+                <div class="code-output"><span id="lorem-code-display">Generated text will appear here</span><button onclick="copyToolCode('lorem-code-display')">Copy</button></div>
+            </div>
+
+            <div class="tool-card slide-in-right">
+                <h3>Password Generator</h3>
+                <div class="preview-area" style="display: flex; align-items: center; justify-content: center;">
+                    <p id="password-display" style="font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; color: #27c93f; letter-spacing: 2px; margin: 0;">Click generate</p>
+                </div>
+                <div class="controls">
+                    <div class="control-group"><label>Length</label><input type="range" id="pass-length" min="8" max="32" value="16"></div>
+                    <div class="control-group" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                        <label><input type="checkbox" id="pass-upper" checked> Uppercase</label>
+                        <label><input type="checkbox" id="pass-numbers" checked> Numbers</label>
+                        <label><input type="checkbox" id="pass-symbols" checked> Symbols</label>
+                    </div>
+                    <button class="btn-main" onclick="generatePassword()" style="margin-top: 10px; width: 100%;">Generate Password</button>
+                </div>
+                <div class="code-output"><span id="password-code">Your password will appear here</span><button onclick="copyToolCode('password-code')">Copy</button></div>
+            </div>
+
+            <div class="tool-card slide-in-left">
                 <h3>JS Keycode Finder</h3>
                 <div class="preview-area"><h1 id="key-display" style="font-size: 3rem; margin: 0; color:white;">?</h1></div>
                 <div class="controls"><p style="text-align: center; color: #94a3b8; font-size: 0.9rem;">Press any key on your keyboard</p></div>
@@ -120,70 +158,384 @@
         </div>
     </section>
 
-    <section id="snippets-section" class="snippets-container reveal">
-        <div class="section-title">
+    <!-- SNIPPETS SECTION -->
+    <section id="snippets-section" class="snippets-container scroll-section">
+        <div class="section-title fade-in-scroll">
             <h2>Code Snippets</h2>
             <p>Copy-paste ready components for your next project.</p>
         </div>
 
         <div class="snippets-grid">
-            <div class="snippet-card">
+            <div class="snippet-card scale-in">
                 <div class="snippet-preview"><button class="demo-neon-btn">Vyntax</button></div>
                 <div class="snippet-footer"><h4>Neon Glow Button</h4><button class="copy-snip-btn" onclick="copySnippet('snip1')">Copy Code</button></div>
                 <textarea id="snip1" class="hidden-code">.btn { background: #d946ef; color: white; border: none; padding: 12px 24px; font-weight: bold; border-radius: 8px; box-shadow: 0 0 15px #d946ef; transition: 0.3s; } .btn:hover { box-shadow: 0 0 25px #d946ef, 0 0 5px white; transform: scale(1.05); }</textarea>
             </div>
-            <div class="snippet-card">
+
+            <div class="snippet-card scale-in">
                 <div class="snippet-preview"><div class="demo-loader"></div></div>
                 <div class="snippet-footer"><h4>Simple Spinner</h4><button class="copy-snip-btn" onclick="copySnippet('snip2')">Copy Code</button></div>
                 <textarea id="snip2" class="hidden-code">.loader { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #27c93f; border-radius: 50%; animation: spin 1s linear infinite; } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</textarea>
             </div>
-            <div class="snippet-card">
+
+            <div class="snippet-card scale-in">
                 <div class="snippet-preview" style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=400'); background-size: cover;"><div class="demo-glass">Glass</div></div>
                 <div class="snippet-footer"><h4>Glassmorphism Card</h4><button class="copy-snip-btn" onclick="copySnippet('snip3')">Copy Code</button></div>
                 <textarea id="snip3" class="hidden-code">.glass-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 20px; }</textarea>
             </div>
-            <div class="snippet-card">
+
+            <div class="snippet-card scale-in">
                 <div class="snippet-preview"><h2 class="demo-glitch" data-text="CYBERPUNK">CYBERPUNK</h2></div>
                 <div class="snippet-footer"><h4>Glitch Effect</h4><button class="copy-snip-btn" onclick="copySnippet('snip4')">Copy Code</button></div>
-                <textarea id="snip4" class="hidden-code">.glitch { position: relative; font-size: 2rem; font-weight: bold; color: white; } .glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0f172a; } .glitch::before { left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(24px, 550px, 90px, 0); animation: glitch 2s infinite linear alternate-reverse; } .glitch::after { left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } @keyframes glitch { 0% { clip: rect(10px, 9999px, 30px, 0); } 100% { clip: rect(80px, 9999px, 100px, 0); } }</textarea>
+                <textarea id="snip4" class="hidden-code">.glitch { position: relative; font-size: 2rem; font-weight: bold; color: white; } .glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0f172a; } .glitch::before { left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } .glitch::after { left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } @keyframes glitch { 0% { clip: rect(10px, 9999px, 30px, 0); } 100% { clip: rect(80px, 9999px, 100px, 0); } }</textarea>
             </div>
-            <div class="snippet-card">
+
+            <div class="snippet-card scale-in">
                 <div class="snippet-preview"><div class="demo-gradient-card">HOVER ME</div></div>
                 <div class="snippet-footer"><h4>Gradient Border</h4><button class="copy-snip-btn" onclick="copySnippet('snip5')">Copy Code</button></div>
                 <textarea id="snip5" class="hidden-code">.gradient-box { position: relative; padding: 20px 40px; background: #0f172a; border-radius: 10px; color: white; font-weight: bold; } .gradient-box::before { content: ""; position: absolute; inset: -3px; border-radius: 12px; background: linear-gradient(45deg, #ff00c1, #00fff9); z-index: -1; filter: blur(10px); opacity: 0; transition: opacity 0.3s; } .gradient-box:hover::before { opacity: 1; }</textarea>
             </div>
-            <div class="snippet-card">
+
+            <div class="snippet-card scale-in">
                 <div class="snippet-preview"><div class="demo-typing">Hacking System...</div></div>
                 <div class="snippet-footer"><h4>Typewriter Effect</h4><button class="copy-snip-btn" onclick="copySnippet('snip6')">Copy Code</button></div>
                 <textarea id="snip6" class="hidden-code">.typing { width: 16ch; white-space: nowrap; overflow: hidden; border-right: 3px solid #27c93f; font-family: monospace; font-size: 1.5rem; animation: typing 2s steps(16), blink .5s step-end infinite alternate; } @keyframes typing { from { width: 0; } } @keyframes blink { 50% { border-color: transparent; } }</textarea>
+            </div>
+
+            <div class="snippet-card scale-in">
+                <div class="snippet-preview" style="overflow: hidden;"><div class="demo-smooth-scroll">Scroll Me</div></div>
+                <div class="snippet-footer"><h4>Smooth Scroll</h4><button class="copy-snip-btn" onclick="copySnippet('snip7')">Copy Code</button></div>
+                <textarea id="snip7" class="hidden-code">html { scroll-behavior: smooth; }</textarea>
+            </div>
+
+            <div class="snippet-card scale-in">
+                <div class="snippet-preview"><div class="demo-skeleton"></div></div>
+                <div class="snippet-footer"><h4>Skeleton Loader</h4><button class="copy-snip-btn" onclick="copySnippet('snip8')">Copy Code</button></div>
+                <textarea id="snip8" class="hidden-code">.skeleton { background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%); background-size: 200% 100%; animation: loading 1.5s infinite; width: 100%; height: 20px; border-radius: 4px; } @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }</textarea>
+            </div>
+
+            <div class="snippet-card scale-in">
+                <div class="snippet-preview"><div class="demo-custom-scrollbar" style="width: 80%; height: 60px; overflow-y: scroll; background: #1e293b; padding: 10px; border-radius: 8px; color: #94a3b8; font-size: 0.8rem;">Custom scrollbar! Scroll to see the effect. This is a demo of a styled scrollbar using pure CSS.</div></div>
+                <div class="snippet-footer"><h4>Custom Scrollbar</h4><button class="copy-snip-btn" onclick="copySnippet('snip9')">Copy Code</button></div>
+                <textarea id="snip9" class="hidden-code">::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #1e293b; } ::-webkit-scrollbar-thumb { background: #d946ef; border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: #a855f7; }</textarea>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESOURCES HUB SECTION -->
+    <section id="resources-section" class="resources-container scroll-section">
+        <div class="section-header fade-in-scroll">
+            <h2>Resources Hub</h2>
+            <p>Curated collection of the best developer resources.</p>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-category slide-in-bottom">
+                <h3>🎨 Design Resources</h3>
+                <ul class="resource-list">
+                    <li><a href="https://unsplash.com" target="_blank">Unsplash</a> - Free high-quality images</li>
+                    <li><a href="https://undraw.co" target="_blank">unDraw</a> - Open-source illustrations</li>
+                    <li><a href="https://coolors.co" target="_blank">Coolors</a> - Color palette generator</li>
+                    <li><a href="https://fontpair.co" target="_blank">FontPair</a> - Font pairing tool</li>
+                </ul>
+            </div>
+
+            <div class="resource-category slide-in-bottom">
+                <h3>🔌 Free APIs</h3>
+                <ul class="resource-list">
+                    <li><a href="https://jsonplaceholder.typicode.com" target="_blank">JSONPlaceholder</a> - Fake REST API</li>
+                    <li><a href="https://openweathermap.org/api" target="_blank">OpenWeather</a> - Weather data API</li>
+                    <li><a href="https://pokeapi.co" target="_blank">PokéAPI</a> - Pokémon data</li>
+                    <li><a href="https://dog.ceo/dog-api" target="_blank">Dog API</a> - Random dog images</li>
+                </ul>
+            </div>
+
+            <div class="resource-category slide-in-bottom">
+                <h3>💎 Icon Libraries</h3>
+                <ul class="resource-list">
+                    <li><a href="https://lucide.dev" target="_blank">Lucide</a> - Beautiful icon set</li>
+                    <li><a href="https://fontawesome.com" target="_blank">Font Awesome</a> - Classic icons</li>
+                    <li><a href="https://heroicons.com" target="_blank">Heroicons</a> - Tailwind icons</li>
+                    <li><a href="https://feathericons.com" target="_blank">Feather</a> - Simply beautiful icons</li>
+                </ul>
+            </div>
+
+            <div class="resource-category slide-in-bottom">
+                <h3>🛠️ Dev Tools</h3>
+                <ul class="resource-list">
+                    <li><a href="https://regex101.com" target="_blank">Regex101</a> - Regex tester</li>
+                    <li><a href="https://caniuse.com" target="_blank">Can I Use</a> - Browser support tables</li>
+                    <li><a href="https://bundlephobia.com" target="_blank">Bundlephobia</a> - Package size checker</li>
+                    <li><a href="https://transform.tools" target="_blank">Transform</a> - Code converter</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHEAT SHEETS SECTION -->
+    <section id="cheatsheets-section" class="cheatsheets-container scroll-section">
+        <div class="section-header fade-in-scroll">
+            <h2>Cheat Sheets</h2>
+            <p>Quick reference guides for common tasks.</p>
+        </div>
+
+        <div class="cheatsheet-grid">
+            <div class="cheatsheet-card scale-in" onclick="toggleCheatsheet('git-cheat')">
+                <div class="cheatsheet-header">
+                    <h3>📦 Git Commands</h3>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="cheatsheet-content" id="git-cheat">
+                    <div class="cheat-item">
+                        <code>git init</code>
+                        <span>Initialize a repository</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>git clone [url]</code>
+                        <span>Clone a repository</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>git add .</code>
+                        <span>Stage all changes</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>git commit -m "message"</code>
+                        <span>Commit changes</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>git push origin main</code>
+                        <span>Push to remote</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>git pull</code>
+                        <span>Pull latest changes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cheatsheet-card scale-in" onclick="toggleCheatsheet('flex-cheat')">
+                <div class="cheatsheet-header">
+                    <h3>📐 CSS Flexbox</h3>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="cheatsheet-content" id="flex-cheat">
+                    <div class="cheat-item">
+                        <code>display: flex</code>
+                        <span>Enable flexbox</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>justify-content: center</code>
+                        <span>Center horizontally</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>align-items: center</code>
+                        <span>Center vertically</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>flex-direction: column</code>
+                        <span>Stack vertically</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>gap: 1rem</code>
+                        <span>Space between items</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cheatsheet-card scale-in" onclick="toggleCheatsheet('js-cheat')">
+                <div class="cheatsheet-header">
+                    <h3>⚡ JavaScript Array Methods</h3>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="cheatsheet-content" id="js-cheat">
+                    <div class="cheat-item">
+                        <code>array.map()</code>
+                        <span>Transform each element</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>array.filter()</code>
+                        <span>Filter elements</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>array.reduce()</code>
+                        <span>Reduce to single value</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>array.find()</code>
+                        <span>Find first match</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>array.forEach()</code>
+                        <span>Loop through array</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cheatsheet-card scale-in" onclick="toggleCheatsheet('terminal-cheat')">
+                <div class="cheatsheet-header">
+                    <h3>💻 Terminal Commands</h3>
+                    <span class="expand-icon">+</span>
+                </div>
+                <div class="cheatsheet-content" id="terminal-cheat">
+                    <div class="cheat-item">
+                        <code>ls</code>
+                        <span>List files</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>cd [directory]</code>
+                        <span>Change directory</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>mkdir [name]</code>
+                        <span>Create directory</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>rm [file]</code>
+                        <span>Remove file</span>
+                    </div>
+                    <div class="cheat-item">
+                        <code>pwd</code>
+                        <span>Print working directory</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPONENT LIBRARY SECTION -->
+    <section id="components-section" class="components-container scroll-section">
+        <div class="section-header fade-in-scroll">
+            <h2>Component Library</h2>
+            <p>Pre-built UI components ready to use.</p>
+        </div>
+
+        <div class="components-grid">
+            <div class="component-card slide-in-bottom">
+                <div class="component-preview">
+                    <button class="demo-component-btn">Click Me</button>
+                </div>
+                <h4>Animated Button</h4>
+                <button class="copy-snip-btn" onclick="copySnippet('comp1')">Copy HTML + CSS</button>
+                <textarea id="comp1" class="hidden-code"><button class="animated-btn">Click Me</button>
+
+.animated-btn { background: linear-gradient(45deg, #d946ef, #a855f7); color: white; border: none; padding: 14px 32px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(217, 70, 239, 0.4); } .animated-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217, 70, 239, 0.6); }</textarea>
+            </div>
+
+            <div class="component-card slide-in-bottom">
+                <div class="component-preview" style="background: #1e293b; padding: 15px;">
+                    <div class="demo-card-component">
+                        <h4 style="margin: 0 0 8px 0; color: white;">Card Title</h4>
+                        <p style="margin: 0; color: #94a3b8; font-size: 0.85rem;">This is a glassmorphic card component.</p>
+                    </div>
+                </div>
+                <h4>Glass Card</h4>
+                <button class="copy-snip-btn" onclick="copySnippet('comp2')">Copy HTML + CSS</button>
+                <textarea id="comp2" class="hidden-code"><div class="glass-card"><h4>Card Title</h4><p>Card content here.</p></div>
+
+.glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 20px; }</textarea>
+            </div>
+
+            <div class="component-card slide-in-bottom">
+                <div class="component-preview">
+                    <div class="demo-badge">New</div>
+                </div>
+                <h4>Badge</h4>
+                <button class="copy-snip-btn" onclick="copySnippet('comp3')">Copy HTML + CSS</button>
+                <textarea id="comp3" class="hidden-code"><span class="badge">New</span>
+
+.badge { background: #27c93f; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; display: inline-block; }</textarea>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEARNING PATH SECTION -->
+    <section id="learning-section" class="learning-container scroll-section">
+        <div class="section-header fade-in-scroll">
+            <h2>Learning Roadmap</h2>
+            <p>Your path to becoming a frontend developer.</p>
+        </div>
+
+        <div class="roadmap">
+            <div class="roadmap-step slide-in-left">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>HTML & CSS Basics</h3>
+                    <ul>
+                        <li>HTML5 semantic elements</li>
+                        <li>CSS selectors and specificity</li>
+                        <li>Flexbox and Grid layouts</li>
+                        <li>Responsive design principles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="roadmap-step slide-in-right">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>JavaScript Fundamentals</h3>
+                    <ul>
+                        <li>Variables, data types, functions</li>
+                        <li>DOM manipulation</li>
+                        <li>Events and event handling</li>
+                        <li>Async programming (Promises, async/await)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="roadmap-step slide-in-left">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Modern Frameworks</h3>
+                    <ul>
+                        <li>React.js or Vue.js</li>
+                        <li>Component-based architecture</li>
+                        <li>State management</li>
+                        <li>Routing and navigation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="roadmap-step slide-in-right">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Build Tools & Deployment</h3>
+                    <ul>
+                        <li>Git version control</li>
+                        <li>NPM/Yarn package managers</li>
+                        <li>Webpack/Vite bundlers</li>
+                        <li>Deploy to Netlify/Vercel</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
 </div> 
+
+<footer style="background: #020617; border-top: 1px solid rgba(255,255,255,0.05); padding: 3rem 10%; text-align: center;">
+    <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 2rem; margin-bottom: 2rem;">
+        <div style="text-align: left;">
+            <img src="vyntax-logo.png" alt="Vyntax" style="height: 35px; margin-bottom: 1rem;">
+            <p style="color: #94a3b8; max-width: 300px; margin: 0;">Built for developers, by a developer.</p>
+        </div>
+        <div style="display: flex; gap: 3rem;">
+            <div style="text-align: left;">
+                <h4 style="color: #27c93f; margin-bottom: 1rem;">Quick Links</h4>
+                <a href="#tools-section" style="display: block; color: #94a3b8; text-decoration: none; margin-bottom: 0.5rem;">Tools</a>
+                <a href="#snippets-section" style="display: block; color: #94a3b8; text-decoration: none; margin-bottom: 0.5rem;">Snippets</a>
+                <a href="blog.html" style="display: block; color: #94a3b8; text-decoration: none; margin-bottom: 0.5rem;">Blog</a>
+                <a href="about.html" style="display: block; color: #94a3b8; text-decoration: none;">About</a>
+            </div>
+            <div style="text-align: left;">
+                <h4 style="color: #d946ef; margin-bottom: 1rem;">Connect</h4>
+                <a href="https://github.com/Aviralsahu960" target="_blank" style="display: block; color: #94a3b8; text-decoration: none; margin-bottom: 0.5rem;">GitHub</a>
+                <a href="https://www.linkedin.com/in/aviral-sahu-vyntaxdev/" target="_blank" style="display: block; color: #94a3b8; text-decoration: none;">LinkedIn</a>
+            </div>
+        </div>
+    </div>
+    <p style="color: #64748b; font-size: 0.9rem; margin: 0;">&copy; 2025 Vyntax. All rights reserved.</p>
+</footer>
+
 <script src="script.js"></script>
 </body>
-<footer class="site-footer">
-    <div class="footer-content">
-        <div class="footer-brand">
-            <img src="vyntax logo.png" alt="Vyntax" class="footer-logo">
-            <p>Built for developers, by a developer.</p>
-        </div>
-        <div class="footer-links">
-            <h3>Quick Links</h3>
-            <a href="#tools-section">Tools</a>
-            <a href="#snippets-section">Snippets</a>
-            <a href="blog.html">Blog</a>
-            <a href="about.html">About</a>
-        </div>
-        <div class="footer-social">
-            <h3>Connect</h3>
-            <a href="https://github.com/Aviralsahu960" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/aviral-sahu-vyntaxdev/" target="_blank">LinkedIn</a>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        &copy; 2025 Vyntax. All rights reserved.
-    </div>
-</footer>
 </html>
