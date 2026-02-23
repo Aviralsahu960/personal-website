@@ -6,9 +6,15 @@
     <title>Blog | Vyntax</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
 </head>
 <body>
-  <canvas id="hyperspeed-canvas"></canvas>
+    <canvas id="hyperspeed-canvas"></canvas>
+
     <nav class="navbar">
         <div class="logo">
             <img src="vyntax-logo.png" alt="Vyntax-Logo" class="logo-img">
@@ -16,7 +22,7 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="index.html#tools-section">Tools</a></li>
-            <li><a href="blog.html" class="active">Blog</a></li> 
+            <li><a href="blog.html" class="active">Blog</a></li>
             <li><a href="about.html">About Aviral</a></li>
         </ul>
     </nav>
@@ -30,7 +36,6 @@
 
     <section class="blog-container">
         <div class="blog-grid">
-
             <article class="blog-card">
                 <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop');"></div>
                 <div class="card-content">
@@ -46,7 +51,7 @@
                 <div class="card-content">
                     <span class="category">CSS</span>
                     <h3>Mastering CSS Grid & Flexbox</h3>
-                    <p>Why modern layouts are easier than ever, and how to stop fighting with `float: left` forever.</p>
+                    <p>Why modern layouts are easier than ever, and how to stop fighting with <code>float: left</code> forever.</p>
                     <a href="blog-post-2.html" class="read-more">Read Article &rarr;</a>
                 </div>
             </article>
@@ -60,10 +65,9 @@
                     <a href="blog-post-3.html" class="read-more">Read Article &rarr;</a>
                 </div>
             </article>
-
         </div>
     </section>
-    <script src="script.js"></script>
 
+    <script src="script.js"></script>
 </body>
 </html>
