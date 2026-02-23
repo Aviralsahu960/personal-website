@@ -1,5 +1,5 @@
 /* =========================================
-   VYNTAX - WORKING VERSION
+   VYNTAX - WORKING VERSION (with Live Background)
    ========================================= */
 
 console.log('🚀 Vyntax script loaded!');
@@ -28,7 +28,7 @@ function initTools() {
     const shadowBox = document.getElementById('shadow-box');
     const shadowCode = document.getElementById('shadow-code');
 
-    if(hShadow && shadowBox) {
+    if (hShadow && shadowBox) {
         function updateShadow() {
             const val = `${hShadow.value}px ${vShadow.value}px ${blurRadius.value}px ${shadowColor.value}`;
             shadowBox.style.boxShadow = val;
@@ -49,12 +49,12 @@ function initTools() {
     const gradientBox = document.getElementById('gradient-box');
     const gradientCode = document.getElementById('gradient-code');
 
-    if(color1 && gradientBox) {
+    if (color1 && gradientBox) {
         window.updateGradient = function() {
             const val = `linear-gradient(${direction.value}, ${color1.value}, ${color2.value})`;
             gradientBox.style.background = val;
             gradientCode.innerText = `background: ${val};`;
-        }
+        };
         color1.addEventListener('input', updateGradient);
         color2.addEventListener('input', updateGradient);
         direction.addEventListener('change', updateGradient);
@@ -69,7 +69,7 @@ function initTools() {
     const glassBox = document.getElementById('glass-box');
     const glassCode = document.getElementById('glass-code');
 
-    if(glassBlur && glassBox) {
+    if (glassBlur && glassBox) {
         function updateGlass() {
             const opac = glassOpacity.value / 100;
             const bgStyle = `rgba(255, 255, 255, ${opac})`;
@@ -117,7 +117,7 @@ function initNewTools() {
             });
             
             paletteCode.innerText = colors.join(', ');
-        }
+        };
         generatePalette();
         console.log('✅ Palette generator initialized');
     }
@@ -134,7 +134,7 @@ function initNewTools() {
             
             if (loremOutput) loremOutput.innerText = loremText;
             if (loremCode) loremCode.innerText = loremText.substring(0, 100) + '...';
-        }
+        };
         console.log('✅ Lorem generator initialized');
     }
 
@@ -143,9 +143,13 @@ function initNewTools() {
     if (passLength) {
         window.generatePassword = function() {
             const length = parseInt(passLength.value);
-            const useUpper = document.getElementById('pass-upper').checked;
-            const useNumbers = document.getElementById('pass-numbers').checked;
-            const useSymbols = document.getElementById('pass-symbols').checked;
+            const upperEl = document.getElementById('pass-upper');
+            const numsEl = document.getElementById('pass-numbers');
+            const symEl = document.getElementById('pass-symbols');
+
+            const useUpper = upperEl ? upperEl.checked : true;
+            const useNumbers = numsEl ? numsEl.checked : true;
+            const useSymbols = symEl ? symEl.checked : true;
             
             const password = createPassword(length, useUpper, useNumbers, useSymbols);
             
@@ -154,7 +158,7 @@ function initNewTools() {
             
             if (passDisplay) passDisplay.innerText = password;
             if (passCode) passCode.innerText = password;
-        }
+        };
         console.log('✅ Password generator initialized');
     }
 }
@@ -179,7 +183,7 @@ function hexToRgb(hex) {
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16)
-    } : null;
+    } : { r: 217, g: 70, b: 239 }; // safe fallback
 }
 
 function rgbToHsl(r, g, b) {
@@ -248,23 +252,101 @@ function initScrollAnimations() {
         console.log('⚠️ GSAP not loaded, skipping animations');
         return;
     }
-    
+
     try {
         gsap.registerPlugin(ScrollTrigger);
-        
+
         // Hero animations
         gsap.from('.hero h1', { y: 100, opacity: 0, duration: 1.2, ease: 'power3.out' });
         gsap.from('.hero .subtitle', { y: 50, opacity: 0, duration: 1, delay: 0.3, ease: 'power3.out' });
         gsap.from('.hero .cta-group', { y: 50, opacity: 0, duration: 1, delay: 0.6, ease: 'power3.out' });
-        
+
         // Parallax effect
         gsap.to('.hero-visual', {
             y: 200,
             scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 }
         });
-        
+
+        // Section headers / titles
+        gsap.utils.toArray('.fade-in-scroll').forEach((el) => {
+            gsap.from(el, {
+                y: 40,
+                opacity: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Left slide cards
+        gsap.utils.toArray('.slide-in-left').forEach((el) => {
+            gsap.from(el, {
+                x: -60,
+                opacity: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Right slide cards
+        gsap.utils.toArray('.slide-in-right').forEach((el) => {
+            gsap.from(el, {
+                x: 60,
+                opacity: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Bottom slide cards
+        gsap.utils.toArray('.slide-in-bottom').forEach((el) => {
+            gsap.from(el, {
+                y: 60,
+                opacity: 0,
+                duration: 0.9,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 88%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Scale in (snippets etc.)
+        gsap.utils.toArray('.scale-in').forEach((el) => {
+            gsap.from(el, {
+                scale: 0.95,
+                y: 20,
+                opacity: 0,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // ===== PASTE NEW CODE ENDS HERE =====
+
         console.log('✅ Scroll animations initialized');
-    } catch(e) {
+    } catch (e) {
         console.log('⚠️ Animation error:', e);
     }
 }
@@ -273,6 +355,9 @@ function initScrollAnimations() {
 // CANVAS BACKGROUNDS
 // =========================================
 function initCanvasBackgrounds() {
+    // Live geometric background for index page
+    initGeometricBackground();
+
     // Hyperspeed for blog
     const hCanvas = document.getElementById('hyperspeed-canvas');
     if (hCanvas) {
@@ -370,12 +455,162 @@ function initCanvasBackgrounds() {
 }
 
 // =========================================
+// LIVE GEOMETRIC BACKGROUND (INDEX)
+// =========================================
+function initGeometricBackground() {
+    const canvas = document.getElementById('geometric-bg');
+    if (!canvas) return;
+
+    // Respect reduced motion
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    let w = 0, h = 0, dpr = 1;
+    let rafId = null;
+    let t = 0;
+
+    const cfg = {
+        nodeCount: 70,
+        maxSpeed: 0.35,
+        linkDist: 170,
+        nodeRadiusMin: 1.2,
+        nodeRadiusMax: 2.4,
+        glowAlpha: 0.10
+    };
+
+    const rand = (min, max) => Math.random() * (max - min) + min;
+
+    let nodes = [];
+
+    function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2); // cap DPR for perf
+        w = Math.floor(window.innerWidth);
+        h = Math.floor(window.innerHeight);
+
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function resetNodes() {
+        nodes = Array.from({ length: cfg.nodeCount }, () => ({
+            x: rand(0, w),
+            y: rand(0, h),
+            vx: rand(-cfg.maxSpeed, cfg.maxSpeed),
+            vy: rand(-cfg.maxSpeed, cfg.maxSpeed),
+            r: rand(cfg.nodeRadiusMin, cfg.nodeRadiusMax)
+        }));
+    }
+
+    function drawGlow() {
+        const gx = w * 0.2 + Math.sin(t * 0.002) * w * 0.10;
+        const gy = h * 0.35 + Math.cos(t * 0.002) * h * 0.10;
+
+        const rad = Math.max(w, h) * 0.75;
+        const grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, rad);
+        grad.addColorStop(0, `rgba(34, 211, 238, ${cfg.glowAlpha})`); // cyan-ish
+        grad.addColorStop(1, 'rgba(2, 6, 23, 0)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+    }
+
+    function step() {
+        t++;
+
+        ctx.clearRect(0, 0, w, h);
+
+        drawGlow();
+
+        // move nodes
+        for (const n of nodes) {
+            n.x += n.vx;
+            n.y += n.vy;
+
+            // wrap edges
+            if (n.x < -20) n.x = w + 20;
+            if (n.x > w + 20) n.x = -20;
+            if (n.y < -20) n.y = h + 20;
+            if (n.y > h + 20) n.y = -20;
+        }
+
+        // links
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const a = nodes[i], b = nodes[j];
+                const dx = a.x - b.x;
+                const dy = a.y - b.y;
+                const dist = Math.hypot(dx, dy);
+
+                if (dist < cfg.linkDist) {
+                    const alpha = 1 - dist / cfg.linkDist;
+
+                    // alternate colors for depth
+                    ctx.strokeStyle = (j % 2 === 0)
+                        ? `rgba(217, 70, 239, ${0.18 * alpha})` // pink
+                        : `rgba(39, 201, 63, ${0.12 * alpha})`; // green
+
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+            }
+        }
+
+        // nodes
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.75)'; // slate
+        for (const n of nodes) {
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        rafId = requestAnimationFrame(step);
+    }
+
+    function start() {
+        if (rafId) return;
+        rafId = requestAnimationFrame(step);
+    }
+
+    function stop() {
+        if (!rafId) return;
+        cancelAnimationFrame(rafId);
+        rafId = null;
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stop();
+        else start();
+    });
+
+    window.addEventListener('resize', () => {
+        resize();
+        resetNodes();
+    });
+
+    resize();
+    resetNodes();
+    start();
+
+    console.log('✅ Geometric background initialized');
+}
+
+// =========================================
 // UTILITY FUNCTIONS
 // =========================================
 window.toggleCheatsheet = function(id) {
-    const card = document.getElementById(id).parentElement;
+    const content = document.getElementById(id);
+    if (!content) return;
+    const card = content.parentElement;
+    if (!card) return;
     card.classList.toggle('active');
-}
+};
 
 window.copyToolCode = function(elementId) {
     const element = document.getElementById(elementId);
@@ -385,15 +620,17 @@ window.copyToolCode = function(elementId) {
     }).catch(() => {
         alert("❌ Copy failed - please select and copy manually");
     });
-}
+};
 
 window.copySnippet = function(id) {
-    const text = document.getElementById(id).value;
+    const el = document.getElementById(id);
+    if (!el) return;
+    const text = el.value;
     navigator.clipboard.writeText(text).then(() => {
         alert("✅ Snippet Copied!");
     }).catch(() => {
         alert("❌ Copy failed - please select and copy manually");
     });
-}
+};
 
 console.log('✅ Vyntax fully loaded!');

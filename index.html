@@ -12,8 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
-    <!-- Geometric Parallax Background -->
-    <canvas id="geometric-bg"></canvas>
+    <!-- Geometric Live Background -->
+    <canvas id="geometric-bg" aria-hidden="true"></canvas>
 
     <nav class="navbar">
        <div class="logo">
@@ -86,7 +86,7 @@
                 <div class="controls">
                     <div class="control-group"><label>Color 1 (Start)</label><input type="color" id="color1" value="#27c93f"></div>
                     <div class="control-group"><label>Color 2 (End)</label><input type="color" id="color2" value="#d946ef"></div>
-                    <div class="control-group"><label>Direction</label><select id="direction" onchange="updateGradient()"><option value="to right">Left to Right</option><option value="to bottom">Top to Bottom</option><option value="45deg">Diagonal</option></select></div>
+                    <div class="control-group"><label>Direction</label><select id="direction" onchange="updateGradient()"><option value="to right">Left to Right</option><option value="to bottom">Top to Bottom</option><option value="to bottom right">Diagonal</option><option value="45deg">45 Degrees</option></select></div>
                 </div>
                 <div class="code-output"><span id="gradient-code">background: linear-gradient(...);</span><button onclick="copyToolCode('gradient-code')">Copy</button></div>
             </div>
@@ -169,13 +169,13 @@
             <div class="snippet-card scale-in">
                 <div class="snippet-preview"><button class="demo-neon-btn">Vyntax</button></div>
                 <div class="snippet-footer"><h4>Neon Glow Button</h4><button class="copy-snip-btn" onclick="copySnippet('snip1')">Copy Code</button></div>
-                <textarea id="snip1" class="hidden-code">.btn { background: #d946ef; color: white; border: none; padding: 12px 24px; font-weight: bold; border-radius: 8px; box-shadow: 0 0 15px #d946ef; transition: 0.3s; } .btn:hover { box-shadow: 0 0 25px #d946ef, 0 0 5px white; transform: scale(1.05); }</textarea>
+                <textarea id="snip1" class="hidden-code">.btn { background: #d946ef; color: white; border: none; padding: 12px 24px; font-weight: bold; border-radius: 8px; box-shadow: 0 0 15px #d946ef; }</textarea>
             </div>
 
             <div class="snippet-card scale-in">
                 <div class="snippet-preview"><div class="demo-loader"></div></div>
                 <div class="snippet-footer"><h4>Simple Spinner</h4><button class="copy-snip-btn" onclick="copySnippet('snip2')">Copy Code</button></div>
-                <textarea id="snip2" class="hidden-code">.loader { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #27c93f; border-radius: 50%; animation: spin 1s linear infinite; } @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</textarea>
+                <textarea id="snip2" class="hidden-code">.loader { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #27c93f; border-radius: 50%; animation: spin 1s linear infinite; }</textarea>
             </div>
 
             <div class="snippet-card scale-in">
@@ -187,19 +187,19 @@
             <div class="snippet-card scale-in">
                 <div class="snippet-preview"><h2 class="demo-glitch" data-text="CYBERPUNK">CYBERPUNK</h2></div>
                 <div class="snippet-footer"><h4>Glitch Effect</h4><button class="copy-snip-btn" onclick="copySnippet('snip4')">Copy Code</button></div>
-                <textarea id="snip4" class="hidden-code">.glitch { position: relative; font-size: 2rem; font-weight: bold; color: white; } .glitch::before, .glitch::after { content: attr(data-text); position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #0f172a; } .glitch::before { left: 2px; text-shadow: -1px 0 #ff00c1; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } .glitch::after { left: -2px; text-shadow: -1px 0 #00fff9; clip: rect(44px, 450px, 56px, 0); animation: glitch 2s infinite linear alternate-reverse; } @keyframes glitch { 0% { clip: rect(10px, 9999px, 30px, 0); } 100% { clip: rect(80px, 9999px, 100px, 0); } }</textarea>
+                <textarea id="snip4" class="hidden-code">.glitch { position: relative; font-size: 2rem; font-weight: bold; color: white; }</textarea>
             </div>
 
             <div class="snippet-card scale-in">
                 <div class="snippet-preview"><div class="demo-gradient-card">HOVER ME</div></div>
                 <div class="snippet-footer"><h4>Gradient Border</h4><button class="copy-snip-btn" onclick="copySnippet('snip5')">Copy Code</button></div>
-                <textarea id="snip5" class="hidden-code">.gradient-box { position: relative; padding: 20px 40px; background: #0f172a; border-radius: 10px; color: white; font-weight: bold; } .gradient-box::before { content: ""; position: absolute; inset: -3px; border-radius: 12px; background: linear-gradient(45deg, #ff00c1, #00fff9); z-index: -1; filter: blur(10px); opacity: 0; transition: opacity 0.3s; } .gradient-box:hover::before { opacity: 1; }</textarea>
+                <textarea id="snip5" class="hidden-code">.gradient-box { position: relative; padding: 20px 40px; background: #0f172a; border-radius: 10px; color: white; font-weight: bold; }</textarea>
             </div>
 
             <div class="snippet-card scale-in">
                 <div class="snippet-preview"><div class="demo-typing">Hacking System...</div></div>
                 <div class="snippet-footer"><h4>Typewriter Effect</h4><button class="copy-snip-btn" onclick="copySnippet('snip6')">Copy Code</button></div>
-                <textarea id="snip6" class="hidden-code">.typing { width: 16ch; white-space: nowrap; overflow: hidden; border-right: 3px solid #27c93f; font-family: monospace; font-size: 1.5rem; animation: typing 2s steps(16), blink .5s step-end infinite alternate; } @keyframes typing { from { width: 0; } } @keyframes blink { 50% { border-color: transparent; } }</textarea>
+                <textarea id="snip6" class="hidden-code">.typing { width: 16ch; white-space: nowrap; overflow: hidden; border-right: 3px solid #27c93f; font-family: monospace; font-size: 1.5rem; }</textarea>
             </div>
 
             <div class="snippet-card scale-in">
@@ -211,13 +211,13 @@
             <div class="snippet-card scale-in">
                 <div class="snippet-preview"><div class="demo-skeleton"></div></div>
                 <div class="snippet-footer"><h4>Skeleton Loader</h4><button class="copy-snip-btn" onclick="copySnippet('snip8')">Copy Code</button></div>
-                <textarea id="snip8" class="hidden-code">.skeleton { background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%); background-size: 200% 100%; animation: loading 1.5s infinite; width: 100%; height: 20px; border-radius: 4px; } @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }</textarea>
+                <textarea id="snip8" class="hidden-code">.skeleton { background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%); background-size: 200% 100%; animation: loading 1.5s infinite; }</textarea>
             </div>
 
             <div class="snippet-card scale-in">
-                <div class="snippet-preview"><div class="demo-custom-scrollbar" style="width: 80%; height: 60px; overflow-y: scroll; background: #1e293b; padding: 10px; border-radius: 8px; color: #94a3b8; font-size: 0.8rem;">Custom scrollbar! Scroll to see the effect. This is a demo of a styled scrollbar using pure CSS.</div></div>
+                <div class="snippet-preview"><div class="demo-custom-scrollbar" style="width: 80%; height: 60px; overflow-y: scroll; background: #1e293b; padding: 10px; border-radius: 8px; color: #94a3b8;">Scroll inside</div></div>
                 <div class="snippet-footer"><h4>Custom Scrollbar</h4><button class="copy-snip-btn" onclick="copySnippet('snip9')">Copy Code</button></div>
-                <textarea id="snip9" class="hidden-code">::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #1e293b; } ::-webkit-scrollbar-thumb { background: #d946ef; border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: #a855f7; }</textarea>
+                <textarea id="snip9" class="hidden-code">::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-thumb { background: #d946ef; }</textarea>
             </div>
         </div>
     </section>
@@ -418,7 +418,7 @@
                 <button class="copy-snip-btn" onclick="copySnippet('comp1')">Copy HTML + CSS</button>
                 <textarea id="comp1" class="hidden-code"><button class="animated-btn">Click Me</button>
 
-.animated-btn { background: linear-gradient(45deg, #d946ef, #a855f7); color: white; border: none; padding: 14px 32px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(217, 70, 239, 0.4); } .animated-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217, 70, 239, 0.6); }</textarea>
+.animated-btn { background: linear-gradient(45deg, #d946ef, #a855f7); color: white; border: none; padding: 14px 32px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(217, 70, 239, 0.4); }</textarea>
             </div>
 
             <div class="component-card slide-in-bottom">
