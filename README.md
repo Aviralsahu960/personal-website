@@ -82,7 +82,6 @@ The homepage also includes:
 - `about.html` — About page using `#grid-canvas`
 - `blog.html` — Blog page using `#hyperspeed-canvas`
 - `contact.html` — Contact page
-- `ANIMATIONS-GUIDE.md` — explanation of scroll animations + how to customize
 
 ---
 
